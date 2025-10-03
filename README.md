@@ -1,5 +1,10 @@
 # Lua Code Evaluation — Rank & Repair (with tiny LÖVE harness)
 
+![lua-tests](https://github.com/QuidVolo/lua-eval-rank-repair/actions/workflows/lua-tests.yml/badge.svg)](https://github.com/QuidVolo/lua-eval-rank-repair/actions/workflows/lua-tests.yml)
+
+Minimal pack that ranks alternatives, repairs a bug (diff), and validates with pure-Lua tests + a tiny LÖVE harness. Includes a spawn scheduler, toy linter, micro-benchmark, GDScript port, and a weighted rubric.
+
+
 This artifact mirrors common evaluator tasks:
 1) **Rank** 3 alternate Lua solutions (best → worst) with short rationales.
 2) **Repair** a buggy snippet and prove it with a tiny **LÖVE** test harness.
