@@ -1,0 +1,6 @@
+# Rubric (5 points)
+1) Correctness (spec & edge cases)
+2) Readability (clear names, short function)
+3) Idiomatic Lua (locals, modules, math)
+4) Performance (no redundant work)
+5) Testability (pure-ish, deterministic, small harness)

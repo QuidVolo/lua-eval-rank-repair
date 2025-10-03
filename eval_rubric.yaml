@@ -1,0 +1,13 @@
+# eval_rubric.yaml — simple weights for ranking
+weights:
+  correctness: 5
+  readability: 4
+  idiomatic: 3
+  performance: 3
+  testability: 4
+notes:
+  - Guard zero distance and NaN/Inf propagation
+  - Prefer pure/pure-ish small functions (easier to test)
+  - Avoid hidden globals; use locals/modules
+  - Clamp steps to avoid jitter/overshoot
+  - Return booleans/flags that help callers write simple state machines

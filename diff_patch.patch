@@ -1,0 +1,44 @@
+--- buggy_spawn.lua
++++ fixed_spawn.lua
+@@
+-local function step_entity(e, target, dt)
+-  -- assume e.pos exists (bug)
+-  local x, y = e.pos.x, e.pos.y
+-
+-  local dx, dy = target.x - x, target.y - y
+-  local dist = math.sqrt(dx*dx + dy*dy)
+-
+-  -- normalize (risk: 0/0 when dist==0)
+-  local nx, ny = dx / dist, dy / dist
+-
+-  -- blindly mutate (bug if dist==0, yields NaN)
+-  x = x + nx * e.speed * dt
+-  y = y + ny * e.speed * dt
+-
+-  -- write back
+-  e.pos.x, e.pos.y = x, y
+-  return e.pos.x, e.pos.y, dist == 0
+-end
+-
+-return step_entity
++local function step_entity(e, target, dt)
++  if not e.pos then e.pos = {x=0, y=0} end
++  local x, y = e.pos.x, e.pos.y
++  local dx, dy = target.x - x, target.y - y
++  local dist_sq = dx*dx + dy*dy
++  if dist_sq == 0 then
++    return x, y, true
++  end
++  local dist = math.sqrt(dist_sq)
++  local step = (e.speed or 0) * dt
++  if step >= dist then
++    e.pos.x, e.pos.y = target.x, target.y
++    return target.x, target.y, true
++  end
++  local nx, ny = dx / dist, dy / dist
++  e.pos.x = x + nx * step
++  e.pos.y = y + ny * step
++  return e.pos.x, e.pos.y, false
++end
++
++return step_entity
